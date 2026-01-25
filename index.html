@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Comparateur Fast-Food Nancy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>🍔 FastFood Compare</h1>
+  <p>Nancy – Compare les prix et les calories</p>
+</header>
+
+<nav>
+  <select id="filtreFastfood">
+    <option value="all">Tous les fast-foods</option>
+    <option value="McDonald's">McDonald's</option>
+    <option value="Burger King">Burger King</option>
+    <option value="KFC">KFC</option>
+  </select>
+
+  <select id="tri">
+    <option value="prix">Trier par prix</option>
+    <option value="calories">Trier par calories</option>
+  </select>
+</nav>
+
+<main id="liste"></main>
+
+<script src="data.js"></script>
+<script>
+const liste = document.getElementById("liste");
+const filtreFastfood = document.getElementById("filtreFastfood");
+const tri = document.getElementById("tri");
+
+function afficherProduits(data) {
+  liste.innerHTML = "";
+  data.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <h3>${p.nom}</h3>
+      <p class="fastfood">${p.fastfood}</p>
+      <p>💰 ${p.prix.toFixed(2)} €</p>
+      <p>🔥 ${p.calories} kcal</p>
+      <p class="ratio">📊 ${(p.prix / p.calories * 100).toFixed(2)} €/100kcal</p>
+    `;
+    liste.appendChild(card);
+  });
+}
+
+function filtrerEtTrier() {
+  let data = [...produits];
+
+  if (filtreFastfood.value !== "all") {
+    data = data.filter(p => p.fastfood === filtreFastfood.value);
+  }
+
+  if (tri.value === "prix") {
+    data.sort((a, b) => a.prix - b.prix);
+  } else {
+    data.sort((a, b) => a.calories - b.calories);
+  }
+
+  afficherProduits(data);
+}
+
+filtreFastfood.addEventListener("change", filtrerEtTrier);
+tri.addEventListener("change", filtrerEtTrier);
+
+filtrerEtTrier();
+</script>
+
+</body>
+</html>
