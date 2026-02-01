@@ -11,252 +11,109 @@
             --muscle-base: #ecf0f1;
             --muscle-hover: #e74c3c;
             --bg: #fdfdfd;
-            --footer-bg: #f4f7f6;
+            --info-bg: #f4f7f6;
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg);
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
             margin: 0;
+            color: #333;
         }
+
+        /* --- BOUTONS FIXES NAVIGATION --- */
+        .open-btn { position: fixed; top: 20px; left: 20px; background: var(--secondary); color: white; padding: 12px 18px; border: none; border-radius: 8px; cursor: pointer; z-index: 999; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn-programmes { position: fixed; top: 20px; right: 20px; background-color: #000; color: #fff; padding: 12px 24px; font-weight: bold; text-transform: uppercase; text-decoration: none; border: 2px solid #fff; border-radius: 5px; z-index: 1000; box-shadow: 0px 4px 15px rgba(0,0,0,0.3); transition: 0.3s; }
+        .btn-programmes:hover { background: #fff; color: #000; border-color: #000; transform: scale(1.05); }
 
         /* --- SIDEBAR --- */
-        .sidebar {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            background-color: var(--secondary);
-            overflow-x: hidden;
-            transition: 0.3s;
-            padding-top: 60px;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
-        }
+        .sidebar { height: 100%; width: 0; position: fixed; z-index: 1100; top: 0; left: 0; background-color: var(--secondary); overflow-x: hidden; transition: 0.3s; padding-top: 60px; }
+        .sidebar a { padding: 10px 20px; text-decoration: none; font-size: 15px; color: #bdc3c7; display: block; cursor: pointer; transition: 0.2s; }
+        .sidebar a:hover { color: white; background: #34495e; padding-left: 25px; }
+        .sidebar-section { color: var(--primary); font-size: 0.8em; font-weight: bold; padding: 15px 20px 5px; text-transform: uppercase; letter-spacing: 1px; }
+        .closebtn { position: absolute; top: 10px; right: 20px; font-size: 30px; color: white; text-decoration: none; }
 
-        .sidebar-section {
-            color: var(--primary);
-            font-size: 0.8em;
-            font-weight: bold;
-            padding: 15px 20px 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .sidebar a {
-            padding: 10px 20px;
-            text-decoration: none;
-            font-size: 15px;
-            color: #bdc3c7;
-            display: block;
-            transition: 0.2s;
-            cursor: pointer;
-        }
-
-        .sidebar a:hover {
-            color: white;
-            background: #34495e;
-            padding-left: 25px;
-        }
-
-        .closebtn {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 30px !important;
-            color: white !important;
-        }
-
-        .open-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: var(--secondary);
-            color: white;
-            padding: 12px 18px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            z-index: 999;
-            font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        /* --- LAYOUT --- */
-        .main-container {
-            display: flex;
-            gap: 40px;
-            max-width: 1100px;
+        /* --- TITRE ET RUBRIQUE INFOS (VISIBILITÉ MAX) --- */
+        h1 { margin-top: 60px; color: var(--secondary); margin-bottom: 10px; }
+        
+        .top-info-box {
+            max-width: 850px;
             width: 100%;
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            margin-top: 20px;
-        }
-
-        .svg-wrapper {
-            flex: 1;
-            text-align: center;
-            background: #f8f9fa;
-            border-radius: 15px;
+            background: var(--info-bg);
+            border-left: 6px solid var(--primary);
             padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
+        .top-info-box p { margin: 5px 0; line-height: 1.5; }
+        .contact-link-inline { color: var(--primary); font-weight: bold; cursor: pointer; text-decoration: underline; }
 
-        svg { height: 550px; width: auto; }
+        /* --- INTERFACE ANATOMIE --- */
+        .toggle-btn { margin-bottom: 20px; padding: 12px 25px; background: var(--primary); color: white; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .toggle-btn:hover { background: #2980b9; transform: translateY(-2px); }
 
-        .muscle {
-            fill: var(--muscle-base);
-            stroke: #bdc3c7;
-            stroke-width: 1.2;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
+        .main-container { display: flex; gap: 40px; max-width: 1100px; width: 100%; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); box-sizing: border-box; }
+        .svg-wrapper { flex: 1; text-align: center; background: #f8f9fa; border-radius: 15px; padding: 20px; display: flex; justify-content: center; }
+        svg { height: 500px; width: auto; }
 
+        .muscle { fill: var(--muscle-base); stroke: #bdc3c7; stroke-width: 1.2; cursor: pointer; transition: 0.2s; }
         .muscle:hover { fill: var(--muscle-hover); }
-        .muscle.active {
-            fill: var(--primary);
-            filter: drop-shadow(0 0 5px rgba(52, 152, 219, 0.5));
-        }
+        .muscle.active { fill: var(--primary); filter: drop-shadow(0 0 5px rgba(52, 152, 219, 0.4)); }
 
         .info-panel { flex: 1; min-width: 300px; }
         #muscle-title { color: var(--secondary); border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-top: 0; }
-        .exercise-item {
-            background: #f9f9f9;
-            border-left: 4px solid var(--primary);
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 4px;
+        .exercise-item { background: #f9f9f9; border-left: 4px solid var(--primary); padding: 12px; margin-bottom: 10px; border-radius: 4px; font-weight: 500; }
+
+        /* --- CONTACT & MODAL --- */
+        .btn-contact-fixed { position: fixed; bottom: 20px; right: 20px; background: #ff4500; color: white; padding: 15px 25px; border-radius: 50px; border: none; font-weight: bold; cursor: pointer; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: 0.3s; }
+        .btn-contact-fixed:hover { transform: scale(1.1); background: #e63e00; }
+
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); }
+        .modal-content { background: white; margin: 8% auto; padding: 30px; border-radius: 15px; width: 90%; max-width: 450px; position: relative; animation: slideIn 0.3s; }
+        @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #999; }
+        .modal-content input, .modal-content textarea { width: 100%; margin: 10px 0; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .btn-submit { background: var(--secondary); color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px; margin-top: 10px; }
+
+        @media (max-width: 850px) {
+            .main-container { flex-direction: column; padding: 20px; }
+            svg { height: 400px; }
         }
-
-        .toggle-btn {
-            margin-bottom: 20px;
-            padding: 12px 25px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        .toggle-btn:hover { transform: scale(1.05); background: #2980b9; }
-
-        /* --- BOUTONS FIXES --- */
-        .btn-programmes {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #000000;
-            color: #ffffff;
-            padding: 12px 24px;
-            font-family: 'Arial', sans-serif;
-            font-weight: bold;
-            text-transform: uppercase;
-            text-decoration: none;
-            border: 2px solid #ffffff;
-            border-radius: 5px;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
-        }
-
-        .btn-programmes:hover {
-            background-color: #ffffff;
-            color: #000000;
-            border: 2px solid #000000;
-            transform: scale(1.05);
-        }
-
-        .btn-contact-fixed {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--primary);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 50px;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 999;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        /* --- SECTION INFOS BAS DE PAGE --- */
-        .info-section {
-            max-width: 1100px;
-            width: 100%;
-            margin-top: 50px;
-            padding: 30px;
-            background: var(--footer-bg);
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid #e0e0e0;
-        }
-
-        .info-section h3 {
-            color: var(--secondary);
-            margin-bottom: 15px;
-        }
-
-        .info-section p {
-            color: #7f8c8d;
-            line-height: 1.6;
-            margin: 5px 0;
-        }
-
-        .contact-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .contact-link:hover { text-decoration: underline; }
-
-        /* MODAL (Simplifié) */
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
-        .modal-content { background: white; margin: 10% auto; padding: 30px; border-radius: 10px; width: 80%; max-width: 500px; }
-        .close-btn { float: right; font-size: 28px; cursor: pointer; }
-        form input, form textarea { width: 100%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
-        .btn-submit { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; }
-
     </style>
 </head>
 <body>
 
     <button class="open-btn" onclick="openNav()">☰ TOUS LES MUSCLES</button>
-    <a href="URL_DE_TA_PAGE_PROGRAMMES" class="btn-programmes">Programmes PDC</a>
+    <a href="#" class="btn-programmes">Programmes PDC</a>
 
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <div class="sidebar-section">Vue de Face</div>
-        <a onclick="selectMuscle('trapezes')">Trapèzes (Sup)</a>
-        <a onclick="selectMuscle('deltoides')">Épaules (Avant/Lat)</a>
         <a onclick="selectMuscle('pecs')">Pectoraux</a>
         <a onclick="selectMuscle('biceps')">Biceps</a>
-        <a onclick="selectMuscle('avantbras')">Avant-Bras</a>
         <a onclick="selectMuscle('abdos')">Abdominaux</a>
-        <a onclick="selectMuscle('obliques')">Obliques</a>
         <a onclick="selectMuscle('quadriceps')">Quadriceps</a>
-        <a onclick="selectMuscle('mollets')">Mollets (Face)</a>
-
         <div class="sidebar-section">Vue de Dos</div>
-        <a onclick="selectMuscle('dos-trapezes')">Trapèzes (Milieu/Bas)</a>
-        <a onclick="selectMuscle('deltoides-arr')">Épaules (Arrière)</a>
         <a onclick="selectMuscle('dorsaux')">Grand Dorsal</a>
         <a onclick="selectMuscle('triceps')">Triceps</a>
         <a onclick="selectMuscle('fessiers')">Fessiers</a>
-        <a onclick="selectMuscle('ischios')">Ischio-Jambiers</a>
-        <a onclick="selectMuscle('mollets-dos')">Mollets (Arrière)</a>
     </div>
 
     <h1>Coaching Anatomique</h1>
+
+    <div class="top-info-box">
+        <p><strong>📅 Création :</strong> 2 janvier 2026</p>
+        <p><strong>Coach Muscu :</strong> Votre partenaire fitness pour comprendre votre anatomie et progresser. Cliquez sur un muscle pour voir les exercices.</p>
+        <p>Besoin d'un conseil ? <span class="contact-link-inline" onclick="openContact()">Contactez-nous ici</span></p>
+    </div>
+
     <button class="toggle-btn" onclick="toggleView()">⇌ Changer de vue (Face/Dos)</button>
 
     <div class="main-container">
@@ -265,31 +122,21 @@
                 <g transform="translate(100, 0)">
                     <circle cx="0" cy="30" r="20" fill="#bdc3c7"/>
                     <g id="right-side">
-                        <path id="trapezes" class="muscle" d="M0,50 L25,55 L40,65 L15,50 Z" />
                         <path id="pecs" class="muscle" d="M0,65 L40,65 Q45,90 30,95 L0,95 Z" />
-                        <path id="deltoides" class="muscle" d="M40,60 Q55,60 60,80 Q55,100 45,90 Z" />
                         <path id="biceps" class="muscle" d="M45,90 Q58,110 55,125 L40,120 Z" />
-                        <path id="avantbras" class="muscle" d="M40,120 L55,125 L50,160 L38,150 Z" />
                         <path id="abdos" class="muscle" d="M0,95 L30,95 L25,140 L0,140 Z" />
-                        <path id="obliques" class="muscle" d="M30,95 L40,90 L40,130 L25,140 Z" />
                         <path id="quadriceps" class="muscle" d="M0,140 L40,130 Q45,200 35,230 L5,230 L0,160 Z" />
-                        <path id="mollets" class="muscle" d="M5,230 L35,230 Q40,270 25,300 L10,300 Z" />
                     </g>
                     <g transform="scale(-1, 1)"><use href="#right-side" /></g>
                 </g>
             </svg>
-
             <svg id="back-view" viewBox="0 0 200 400" style="display:none;">
                 <g transform="translate(100, 0)">
                     <circle cx="0" cy="30" r="20" fill="#bdc3c7"/>
                     <g id="back-right">
-                        <path id="dos-trapezes" class="muscle" d="M0,50 L40,65 L15,100 L0,90 Z" />
                         <path id="dorsaux" class="muscle" d="M15,100 L45,90 L40,130 L0,140 Z" />
-                        <path id="deltoides-arr" class="muscle" d="M40,65 L60,80 L45,95 Z" />
                         <path id="triceps" class="muscle" d="M45,95 L55,125 L40,120 Z" />
                         <path id="fessiers" class="muscle" d="M0,140 L40,130 Q45,160 35,170 L0,170 Z" />
-                        <path id="ischios" class="muscle" d="M0,170 L35,170 Q40,230 5,230 L0,230 Z" />
-                        <path id="mollets-dos" class="muscle" d="M5,230 L35,230 Q40,270 25,300 L10,300 Z" />
                     </g>
                     <g transform="scale(-1, 1)"><use href="#back-right" /></g>
                 </g>
@@ -299,58 +146,41 @@
         <div class="info-panel">
             <h2 id="muscle-title">Sélectionnez une zone</h2>
             <div id="exercises-container">
-                <p>Cliquez sur le schéma ou utilisez le menu à gauche.</p>
+                <p>Cliquez sur le schéma ou utilisez le menu latéral pour découvrir les exercices adaptés.</p>
             </div>
         </div>
     </div>
 
-    <div class="info-section">
-        <h3>Informations sur le site</h3>
-        <p><strong>Date de création :</strong> 2 janvier 2026</p>
-        <p><strong>Description :</strong> Coach Muscu est votre partenaire fitness dédié aux pratiquants de musculation de tous niveaux. Que vous soyez débutant ou confirmé, nous vous aidons à comprendre votre anatomie pour mieux progresser.</p>
-        <p>Une question ? Un conseil ? N'hésitez pas à nous contacter via notre <a href="javascript:void(0)" onclick="openContact()" class="contact-link">rubrique contact</a>.</p>
-    </div>
-
-    <button onclick="openContact()" class="btn-contact-fixed">Me contacter</button>
+    <button class="btn-contact-fixed" onclick="openContact()">Me contacter</button>
 
     <div id="modalContact" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeContact()">&times;</span>
+            <span class="close-modal" onclick="closeContact()">&times;</span>
             <h2>Contacte ton coach</h2>
-            <form id="contactForm" name="contact-muscu" method="POST" data-netlify="true">
-                <input type="hidden" name="form-name" value="contact-muscu">
+            <form id="contactForm" method="POST" data-netlify="true">
                 <input type="text" name="nom" placeholder="Ton nom" required>
                 <input type="email" name="email" placeholder="Ton email" required>
-                <textarea name="message" placeholder="Ton objectif..." rows="4" required></textarea>
-                <button type="submit" class="btn-submit">ENVOYER</button>
+                <textarea name="message" placeholder="Ton message ou objectif..." rows="4" required></textarea>
+                <button type="submit" class="btn-submit">ENVOYER LE MESSAGE</button>
             </form>
         </div>
     </div>
 
     <script>
-        // DONNÉES MUSCLES
         const db = {
-            "trapezes": { title: "Trapèzes (Supérieurs)", exs: ["Shrugs", "Tirage menton"], view: "front" },
             "pecs": { title: "Pectoraux", exs: ["Développé couché", "Écartés haltères", "Pompes"], view: "front" },
-            "deltoides": { title: "Épaules (Avant/Lat)", exs: ["Développé militaire", "Élévations latérales"], view: "front" },
-            "biceps": { title: "Biceps", exs: ["Curl haltères", "Curl Larry Scott"], view: "front" },
-            "avantbras": { title: "Avant-Bras", exs: ["Flexion poignets", "Marche du fermier"], view: "front" },
-            "abdos": { title: "Abdominaux", exs: ["Crunchs", "Relevé de jambes", "Gainage"], view: "front" },
-            "obliques": { title: "Obliques", exs: ["Russian Twist", "Flexion latérale"], view: "front" },
-            "quadriceps": { title: "Quadriceps", exs: ["Squat", "Leg Extension", "Fentes"], view: "front" },
-            "mollets": { title: "Mollets", exs: ["Extensions debout", "Presse à mollets"], view: "front" },
-            "dos-trapezes": { title: "Trapèzes (Milieu/Bas)", exs: ["Rowing barre", "Oiseau haltères"], view: "back" },
-            "dorsaux": { title: "Grand Dorsal", exs: ["Tractions", "Tirage bûcheron", "Pull-over"], view: "back" },
-            "deltoides-arr": { title: "Épaules (Arrière)", exs: ["Facepull", "Oiseau poulie"], view: "back" },
-            "triceps": { title: "Triceps", exs: ["Dips", "Barre au front", "Extensions poulie"], view: "back" },
-            "fessiers": { title: "Fessiers", exs: ["Hip Thrust", "Squat bulgare"], view: "back" },
-            "ischios": { title: "Ischio-Jambiers", exs: ["Leg Curl", "Soulevé de terre roumain"], view: "back" },
-            "mollets-dos": { title: "Mollets (Arrière)", exs: ["Extensions assis", "Corde à sauter"], view: "back" }
+            "biceps": { title: "Biceps", exs: ["Curl haltères", "Curl barre EZ"], view: "front" },
+            "abdos": { title: "Abdominaux", exs: ["Crunchs", "Gainage planche"], view: "front" },
+            "quadriceps": { title: "Quadriceps", exs: ["Squat barre", "Leg Extension"], view: "front" },
+            "dorsaux": { title: "Grand Dorsal", exs: ["Tractions", "Tirage poulie haute"], view: "back" },
+            "triceps": { title: "Triceps", exs: ["Dips", "Extensions poulie"], view: "back" },
+            "fessiers": { title: "Fessiers", exs: ["Hip Thrust", "Squat Bulgare"], view: "back" }
         };
 
-        // NAVIGATION
         function openNav() { document.getElementById("mySidebar").style.width = "260px"; }
         function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
+        function openContact() { document.getElementById("modalContact").style.display = "block"; }
+        function closeContact() { document.getElementById("modalContact").style.display = "none"; }
 
         function selectMuscle(id) {
             const data = db[id];
@@ -358,37 +188,31 @@
             const currentView = document.getElementById('front-view').style.display === 'none' ? 'back' : 'front';
             if (data.view !== currentView) toggleView();
             setTimeout(() => {
-                const target = document.getElementById(id);
-                if (target) target.dispatchEvent(new Event('click'));
-            }, 50);
-            if (window.innerWidth < 768) closeNav();
+                const el = document.getElementById(id);
+                if (el) el.dispatchEvent(new Event('click'));
+            }, 100);
+            closeNav();
         }
 
-        document.querySelectorAll('.muscle').forEach(muscle => {
-            muscle.addEventListener('click', function() {
-                document.querySelectorAll('.muscle').forEach(m => m.classList.remove('active'));
-                document.querySelectorAll(`#${this.id}`).forEach(m => m.classList.add('active'));
+        document.querySelectorAll('.muscle').forEach(m => {
+            m.addEventListener('click', function() {
+                document.querySelectorAll('.muscle').forEach(x => x.classList.remove('active'));
+                this.classList.add('active');
                 const data = db[this.id];
-                if (data) {
-                    document.getElementById('muscle-title').textContent = data.title;
-                    document.getElementById('exercises-container').innerHTML = data.exs.map(ex => 
-                        `<div class="exercise-item"><strong>${ex}</strong></div>`
-                    ).join('');
+                if(data) {
+                    document.getElementById('muscle-title').innerText = data.title;
+                    document.getElementById('exercises-container').innerHTML = data.exs.map(e => `<div class="exercise-item">${e}</div>`).join('');
                 }
             });
         });
 
         function toggleView() {
-            const front = document.getElementById('front-view');
-            const back = document.getElementById('back-view');
-            const isFront = front.style.display !== 'none';
-            front.style.display = isFront ? 'none' : 'block';
-            back.style.display = isFront ? 'block' : 'none';
+            const f = document.getElementById('front-view'), b = document.getElementById('back-view');
+            const isF = f.style.display !== 'none';
+            f.style.display = isF ? 'none' : 'block';
+            b.style.display = isF ? 'block' : 'none';
         }
 
-        // CONTACT MODAL
-        function openContact() { document.getElementById("modalContact").style.display = "block"; }
-        function closeContact() { document.getElementById("modalContact").style.display = "none"; }
         window.onclick = function(event) {
             if (event.target == document.getElementById("modalContact")) closeContact();
         }
