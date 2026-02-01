@@ -11,6 +11,7 @@
             --muscle-base: #ecf0f1;
             --muscle-hover: #e74c3c;
             --bg: #fdfdfd;
+            --footer-bg: #f4f7f6;
         }
 
         body {
@@ -146,15 +147,94 @@
         }
         .toggle-btn:hover { transform: scale(1.05); background: #2980b9; }
 
+        /* --- BOUTONS FIXES --- */
+        .btn-programmes {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #000000;
+            color: #ffffff;
+            padding: 12px 24px;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 2px solid #ffffff;
+            border-radius: 5px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn-programmes:hover {
+            background-color: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+            transform: scale(1.05);
+        }
+
+        .btn-contact-fixed {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* --- SECTION INFOS BAS DE PAGE --- */
+        .info-section {
+            max-width: 1100px;
+            width: 100%;
+            margin-top: 50px;
+            padding: 30px;
+            background: var(--footer-bg);
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .info-section h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .info-section p {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin: 5px 0;
+        }
+
+        .contact-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact-link:hover { text-decoration: underline; }
+
+        /* MODAL (Simplifié) */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+        .modal-content { background: white; margin: 10% auto; padding: 30px; border-radius: 10px; width: 80%; max-width: 500px; }
+        .close-btn { float: right; font-size: 28px; cursor: pointer; }
+        form input, form textarea { width: 100%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        .btn-submit { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; }
+
     </style>
 </head>
 <body>
 
     <button class="open-btn" onclick="openNav()">☰ TOUS LES MUSCLES</button>
+    <a href="URL_DE_TA_PAGE_PROGRAMMES" class="btn-programmes">Programmes PDC</a>
 
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-        
         <div class="sidebar-section">Vue de Face</div>
         <a onclick="selectMuscle('trapezes')">Trapèzes (Sup)</a>
         <a onclick="selectMuscle('deltoides')">Épaules (Avant/Lat)</a>
@@ -224,9 +304,32 @@
         </div>
     </div>
 
+    <div class="info-section">
+        <h3>Informations sur le site</h3>
+        <p><strong>Date de création :</strong> 2 janvier 2026</p>
+        <p><strong>Description :</strong> Coach Muscu est votre partenaire fitness dédié aux pratiquants de musculation de tous niveaux. Que vous soyez débutant ou confirmé, nous vous aidons à comprendre votre anatomie pour mieux progresser.</p>
+        <p>Une question ? Un conseil ? N'hésitez pas à nous contacter via notre <a href="javascript:void(0)" onclick="openContact()" class="contact-link">rubrique contact</a>.</p>
+    </div>
+
+    <button onclick="openContact()" class="btn-contact-fixed">Me contacter</button>
+
+    <div id="modalContact" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeContact()">&times;</span>
+            <h2>Contacte ton coach</h2>
+            <form id="contactForm" name="contact-muscu" method="POST" data-netlify="true">
+                <input type="hidden" name="form-name" value="contact-muscu">
+                <input type="text" name="nom" placeholder="Ton nom" required>
+                <input type="email" name="email" placeholder="Ton email" required>
+                <textarea name="message" placeholder="Ton objectif..." rows="4" required></textarea>
+                <button type="submit" class="btn-submit">ENVOYER</button>
+            </form>
+        </div>
+    </div>
+
     <script>
+        // DONNÉES MUSCLES
         const db = {
-            // FACE
             "trapezes": { title: "Trapèzes (Supérieurs)", exs: ["Shrugs", "Tirage menton"], view: "front" },
             "pecs": { title: "Pectoraux", exs: ["Développé couché", "Écartés haltères", "Pompes"], view: "front" },
             "deltoides": { title: "Épaules (Avant/Lat)", exs: ["Développé militaire", "Élévations latérales"], view: "front" },
@@ -236,8 +339,6 @@
             "obliques": { title: "Obliques", exs: ["Russian Twist", "Flexion latérale"], view: "front" },
             "quadriceps": { title: "Quadriceps", exs: ["Squat", "Leg Extension", "Fentes"], view: "front" },
             "mollets": { title: "Mollets", exs: ["Extensions debout", "Presse à mollets"], view: "front" },
-            
-            // DOS
             "dos-trapezes": { title: "Trapèzes (Milieu/Bas)", exs: ["Rowing barre", "Oiseau haltères"], view: "back" },
             "dorsaux": { title: "Grand Dorsal", exs: ["Tractions", "Tirage bûcheron", "Pull-over"], view: "back" },
             "deltoides-arr": { title: "Épaules (Arrière)", exs: ["Facepull", "Oiseau poulie"], view: "back" },
@@ -247,22 +348,19 @@
             "mollets-dos": { title: "Mollets (Arrière)", exs: ["Extensions assis", "Corde à sauter"], view: "back" }
         };
 
+        // NAVIGATION
         function openNav() { document.getElementById("mySidebar").style.width = "260px"; }
         function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
 
         function selectMuscle(id) {
             const data = db[id];
             if (!data) return;
-
             const currentView = document.getElementById('front-view').style.display === 'none' ? 'back' : 'front';
             if (data.view !== currentView) toggleView();
-            
-            // On attend un court instant que la vue change si besoin avant de simuler le clic
             setTimeout(() => {
                 const target = document.getElementById(id);
                 if (target) target.dispatchEvent(new Event('click'));
             }, 50);
-            
             if (window.innerWidth < 768) closeNav();
         }
 
@@ -270,7 +368,6 @@
             muscle.addEventListener('click', function() {
                 document.querySelectorAll('.muscle').forEach(m => m.classList.remove('active'));
                 document.querySelectorAll(`#${this.id}`).forEach(m => m.classList.add('active'));
-
                 const data = db[this.id];
                 if (data) {
                     document.getElementById('muscle-title').textContent = data.title;
@@ -288,66 +385,13 @@
             front.style.display = isFront ? 'none' : 'block';
             back.style.display = isFront ? 'block' : 'none';
         }
+
+        // CONTACT MODAL
+        function openContact() { document.getElementById("modalContact").style.display = "block"; }
+        function closeContact() { document.getElementById("modalContact").style.display = "none"; }
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("modalContact")) closeContact();
+        }
     </script>
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Mon Site de Muscu</title>
-    <link rel="stylesheet" href="style.css"> 
-</head>
-<body>
-
-<button id="btnContact" class="btn-contact">Me contacter</button>
-
-    <div id="modalContact" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h2>Contacte ton coach</h2>
-            <form id="contactForm" name="contact-muscu" method="POST" data-netlify="true">
-                <input type="hidden" name="form-name" value="contact-muscu">
-                
-                <input type="text" name="nom" placeholder="Ton nom" required>
-                <input type="email" name="email" placeholder="Ton email" required>
-                <textarea name="message" placeholder="Ton objectif..." rows="4" required></textarea>
-                
-                <button type="submit" class="btn-submit">ENVOYER</button>
-            </form>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-<style>
-    .btn-programmes {
-        position: fixed; /* Reste en place même quand on scrolle */
-        top: 20px;
-        right: 20px;
-        background-color: #000000; /* Noir */
-        color: #ffffff; /* Blanc */
-        padding: 12px 24px;
-        font-family: 'Arial', sans-serif;
-        font-weight: bold;
-        text-transform: uppercase;
-        text-decoration: none;
-        border: 2px solid #ffffff;
-        border-radius: 5px;
-        z-index: 1000; /* Passe au-dessus de tout le reste */
-        transition: all 0.3s ease;
-        box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
-    }
-
-    .btn-programmes:hover {
-        background-color: #ffffff;
-        color: #000000;
-        border: 2px solid #000000;
-        cursor: pointer;
-        transform: scale(1.05);
-    }
-</style>
-
-<a href="URL_DE_TA_PAGE_PROGRAMMES" class="btn-programmes">
-    Programmes PDC
-</a>
 </body>
 </html>
